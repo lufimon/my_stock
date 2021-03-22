@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_stock/src/pages/home/home_page.dart';
+import 'package:my_stock/src/pages/login/login_page.dart';
 
 class App extends StatelessWidget {
   @override
@@ -9,7 +9,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(title: 'Flutter Demo Home Page'),
+      home: LoginPage(),
     );
   }
 }
