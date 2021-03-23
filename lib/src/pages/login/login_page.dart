@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_stock/src/pages/login/background_theme.dart';
 import 'package:my_stock/src/view_models/sso_viewmodel.dart';
 
 class LoginPage extends StatelessWidget {
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +43,8 @@ class LoginPage extends StatelessWidget {
                         child: Column(
                           children: [
                             TextField(
+                              keyboardType: TextInputType.emailAddress,
+                              controller: _usernameController,
                               decoration: InputDecoration(
                                 hintText: 'example@gmail.com',
                                 labelText: 'username',
@@ -52,6 +58,7 @@ class LoginPage extends StatelessWidget {
                               endIndent: 22,
                             ),
                             TextField(
+                              controller: _passwordController,
                               decoration: InputDecoration(
                                 labelText: 'password',
                                 icon: Icon(Icons.lock),
@@ -76,7 +83,13 @@ class LoginPage extends StatelessWidget {
                               color: Colors.white),
                         ),
                         onPressed: () {
-                          print('login click!!!!');
+                          final username = _usernameController.text;
+                          final password = _passwordController.text;
+                          if(username == "tanuphong.p@hotmail.com" && password == "12345678"){
+                            print('Login success!!');
+                          } else {
+                            print('username or password incorrent!!');
+                          }
                         },
                       ),
                     ),
