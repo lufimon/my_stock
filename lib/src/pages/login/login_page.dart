@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_stock/src/pages/login/background_theme.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -9,15 +10,7 @@ class LoginPage extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color(0xFF36D1DC),
-                  Color(0xFF5B86E5),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.0, 1.0],
-              ),
+              gradient: BackGroundTheme.gradient,
             ),
           ),
           SingleChildScrollView(
@@ -68,15 +61,17 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    Container(
+                      decoration: _boxDecoration(),
                       width: 280,
                       height: 52,
-                      child: ElevatedButton(
+                      child: TextButton(
                         child: Text(
                           'Login',
                           style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
+                            color: Colors.white
                           ),
                         ),
                         onPressed: () {
@@ -86,13 +81,40 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Text('login button'),
                 Text('forgot password'),
                 Text('sso'),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  BoxDecoration _boxDecoration() {
+    final gradientStart = BackGroundTheme().gradientStart;
+    final gradientEnd = BackGroundTheme().gradientEnd;
+
+    final boxShadowItem = (Color color) => BoxShadow(
+      color: color,
+      offset: Offset(1.0, 6.0),
+      blurRadius: 20.0,
+    );
+
+    return BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      boxShadow: <BoxShadow>[
+        boxShadowItem(gradientStart),
+        boxShadowItem(gradientEnd),
+      ],
+      gradient: LinearGradient(
+        colors: [
+          gradientEnd,
+          gradientStart,
+        ],
+        begin: const FractionalOffset(0, 0),
+        end: const FractionalOffset(1.0, 1.0),
+        stops: [0.0, 1.0],
       ),
     );
   }
