@@ -69,10 +69,9 @@ class LoginPage extends StatelessWidget {
                         child: Text(
                           'Login',
                           style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white
-                          ),
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
                         onPressed: () {
                           print('login click!!!!');
@@ -81,8 +80,19 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                _buildTextButton(
+                  'Forgot Password',
+                  onPressed: () {
+                    //todo
+                  },
+                ),
                 Text('forgot password'),
-                Text('sso'),
+                _buildTextButton(
+                  'Register',
+                  onPressed: () {
+                    //todo
+                  },
+                ),
               ],
             ),
           ),
@@ -118,4 +128,16 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+
+  Container _buildTextButton(String text, {VoidCallback onPressed}) => Container(
+      margin: EdgeInsets.symmetric(vertical: 16),
+      width: double.infinity,
+      child: TextButton(
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(color: Colors.white70),
+        ),
+      ),
+    );
 }
