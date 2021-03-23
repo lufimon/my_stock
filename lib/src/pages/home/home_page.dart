@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_stock/src/configs/app_route.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -21,8 +18,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            Spacer(),
+            ListTile(
+              onTap: (){
+                Navigator.pushNamedAndRemoveUntil(context, AppRoute.loginRoute, (route) => false);
+              },
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Logout'),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Home Page'),
       ),
       body: Center(
         child: Column(
