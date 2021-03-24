@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_stock/src/configs/app_route.dart';
+import 'package:my_stock/src/constants/app_setting.dart';
+import 'package:my_stock/src/constants/asset.dart';
 import 'package:my_stock/src/pages/login/background_theme.dart';
 import 'package:my_stock/src/view_models/sso_viewmodel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
   final _usernameController = TextEditingController();
@@ -25,7 +28,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 SizedBox(height: 48,),
                 Image.asset(
-                  'assets/images/cdgs-logo.png',
+                  Asset.logoImage,
                   width: 300,
                 ),
                 Stack(
@@ -82,11 +85,22 @@ class LoginPage extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           final username = _usernameController.text;
                           final password = _passwordController.text;
-                          if(username == "tanuphong.p@hotmail.com" && password == "12345678"){
-                            Navigator.pushReplacementNamed(context, AppRoute.homeRoute);
+                          if (username == "tanuphong.p@hotmail.com" &&
+                              password == "12345678") {
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            var token = 'adfasdfadfasffasdfasdklfjafasdlfkajd';
+                            await prefs.setString(
+                                AppSetting.tokenSetting, token);
+                            await prefs.setString(
+                                AppSetting.usernameString, username);
+                            Navigator.pushReplacementNamed(
+                              context,
+                              AppRoute.homeRoute,
+                            );
                           } else {
                             print('username or password incorrent!!');
                           }

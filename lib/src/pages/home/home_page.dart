@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_stock/src/configs/app_route.dart';
+import 'package:my_stock/src/constants/app_setting.dart';
+import 'package:my_stock/src/constants/asset.dart';
 import 'package:my_stock/src/pages/login/background_theme.dart';
 import 'package:my_stock/src/view_models/menu_viewmodel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -14,9 +17,17 @@ class HomePage extends StatelessWidget {
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2
+          crossAxisCount: 2,
+          childAspectRatio: 0.8,
         ),
-        itemBuilder: (context, index) => ShopListItem(200),
+        itemBuilder: (context, index) => LayoutBuilder(
+          builder: (context, constraint) => ShopListItem(
+            constraint.maxHeight,
+            press: () {
+              print('click!!!');
+            },
+          ),
+        ),
         itemCount: 100,
       ),
       floatingActionButton: FloatingActionButton(
@@ -67,7 +78,9 @@ class CommonDrawer extends StatelessWidget {
               .toList(),
           Spacer(),
           ListTile(
-            onTap: () {
+            onTap: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.remove(AppSetting.tokenSetting);
               Navigator.pushNamedAndRemoveUntil(
                   context, AppRoute.loginRoute, (route) => false);
             },
@@ -140,36 +153,36 @@ class ShopListItem extends StatelessWidget {
   );
 
   Stack _buildImage() {
-    final height = maxHeight - 75;
-    final productImage = 'https://shortrecap.co/wp-content/uploads/2020/05/Catcover_web.jpg';
+    final height = maxHeight * 0.7;
+    final productImage =
+        'https://shortrecap.co/wp-content/uploads/2020/05/Catcover_web.jpg';
     return Stack(
       children: [
         productImage != null && productImage.isNotEmpty
             ? Image.network(
-          productImage,
-          height: height,
-          width: double.infinity,
-          fit: BoxFit.cover,
-        )
+                productImage,
+                height: height,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              )
             : Image.asset(
-          'xxx',
-          height: height,
-          width: double.infinity,
-        ),
-        1 > 0
-            ? SizedBox()
-            : Positioned(
-          top: 1,
-          right: 1,
-          child: Card(
-            color: Colors.white70,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8,
-                vertical: 4,
+                Asset.noPhotoImage,
+                height: height,
+                width: double.infinity,
               ),
-              child: Row(
-                children: <Widget>[
+        if (9 <= 0)
+          Positioned(
+            top: 1,
+            right: 1,
+            child: Card(
+              color: Colors.white70,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
+                child: Row(
+                  children: <Widget>[
                   Icon(
                     FontAwesomeIcons.box,
                     size: 15.0,
