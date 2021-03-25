@@ -58,12 +58,15 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, constraint) => ShopListItem(
                   constraint.maxHeight,
                   productList[index],
-                  press: () {
-                    Navigator.pushNamed(
+                  press: () async {
+                    await Navigator.pushNamed(
                       context,
                       AppRoute.managementRoute,
                       arguments: productList[index],
                     );
+                    setState(() {
+
+                    });
                   },
                 ),
               ),

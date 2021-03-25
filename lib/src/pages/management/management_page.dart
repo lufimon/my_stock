@@ -36,7 +36,6 @@ class _ManagementPageState extends State<ManagementPage> {
       _editMode = true;
     }
     return Scaffold(
-      key: Key('asdfd'),
       appBar: _buildAppBar(),
       body: SingleChildScrollView(
         child: Padding(
@@ -117,21 +116,34 @@ class _ManagementPageState extends State<ManagementPage> {
               _form.currentState.save();
               FocusScope.of(context).requestFocus(FocusNode());
               if (_editMode) {
-                //todo
+                try {
+                  final message = await NetworkService().editProduct(null, _product);
+                  Navigator.pop(context);
+                  showAlertBar(
+                    message,
+                  );
+                } catch (ex) {
+                  showAlertBar(
+                    ex.toString(),
+                    color: Colors.red,
+                    icon: FontAwesomeIcons.cross,
+                  );
+                }
               } else {
                 try {
                   final message =
                       await NetworkService().addProduct(null, _product);
-                  // showAlertBar(
-                  //   message,
-                  // );
                   Navigator.pop(context);
+                  showAlertBar(
+                    message,
+                  );
+
                 } catch (ex) {
-                  // showAlertBar(
-                  //   ex.toString(),
-                  //   color: Colors.red,
-                  //   icon: FontAwesomeIcons.cross,
-                  // );
+                  showAlertBar(
+                    ex.toString(),
+                    color: Colors.red,
+                    icon: FontAwesomeIcons.cross,
+                  );
                 }
               }
             },
