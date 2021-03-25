@@ -90,7 +90,7 @@ class CommonDrawer extends StatelessWidget {
             accountEmail: Text('tanuphong.p@hotmail.com'),
             currentAccountPicture: CircleAvatar(
               backgroundImage: AssetImage(
-                'assets/images/cdgs-logo.png',
+                Asset.logoImage,
               ),
             ),
             decoration: BoxDecoration(gradient: BackGroundTheme.gradient),
