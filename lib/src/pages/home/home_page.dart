@@ -59,7 +59,11 @@ class _HomePageState extends State<HomePage> {
                   constraint.maxHeight,
                   productList[index],
                   press: () {
-                    print('click!!!');
+                    Navigator.pushNamed(
+                      context,
+                      AppRoute.managementRoute,
+                      arguments: productList[index],
+                    );
                   },
                 ),
               ),
