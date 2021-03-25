@@ -69,8 +69,14 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, AppRoute.managementRoute);
+        onPressed: () async {
+          await Navigator.pushNamed(
+            context,
+            AppRoute.managementRoute,
+          );
+          setState(() {
+
+          });
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
