@@ -32,6 +32,9 @@ class GoogleMapPageState extends State<GoogleMapPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: AppBar(
+        title: Text('Map'),
+      ),
       body: GoogleMap(
         markers: _marker,
         mapType: MapType.hybrid,
