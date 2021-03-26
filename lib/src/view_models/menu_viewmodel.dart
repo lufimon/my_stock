@@ -40,7 +40,7 @@ class MenuViewModel {
       icon: Icons.dashboard,
       iconColor: Colors.yellow,
       onTap: (context) {
-        //todo
+        Navigator.pushNamed(context, AppRoute.postPage);
       },
     ),
     Menu(

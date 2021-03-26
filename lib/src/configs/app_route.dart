@@ -6,6 +6,7 @@ class AppRoute {
   static const loginRoute = 'login';
   static const managementRoute = 'management';
   static const googleMapPage = 'googleMap';
+  static const postPage = 'postPage';
 
   get route => _route;
 
@@ -13,6 +14,7 @@ class AppRoute {
     homeRoute: (context) => HomePage(),
     loginRoute: (context) => LoginPage(),
     managementRoute: (context) => ManagementPage(),
-    googleMapPage: (context) => GoogleMapPage()
+    googleMapPage: (context) => GoogleMapPage(),
+    postPage: (context) => PostPage()
   };
 }
