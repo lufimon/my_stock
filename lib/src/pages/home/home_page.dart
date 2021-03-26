@@ -36,10 +36,6 @@ class _HomePageState extends State<HomePage> {
             return Text(snapshot.error.toString());
           }
           final productList = snapshot.data;
-          // var productList = snapshot.data;
-          // for(var i = 0;i < 100000;i++) {
-          //   productList.add(productList.last);
-          // }
           return RefreshIndicator(
             onRefresh: () async {
               setState(() {
